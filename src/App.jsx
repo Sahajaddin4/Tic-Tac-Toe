@@ -1,6 +1,7 @@
 import winLogic from "./WinLogic/winLogic";
 import GameBox from "./components/GameBox";
 import React, { useEffect, useState } from 'react';
+import Player from "./components/Player/Player";
 
 function App() {
   // Initialize the state for the game board data, player's move, and winner
@@ -8,13 +9,18 @@ function App() {
   const [pMove, setPMove] = useState(false);
   const [winner, setWinner] = useState("");
 
+//Asked user name at the starting phase
+
+const [player1,setPlayer1]=useState('');
+
+
   useEffect(() => {
     // Check for a win condition using winLogic
     const win = winLogic(data);
     
     if (win[0]) {
       // If there's a winner, set the winner state
-      setWinner(win[1] === "x" ? "Player" : "Computer");
+      setWinner(win[1] === "x" ? player1 : "Computer");
     } else {
       // Check if the game is a tie by counting non-empty cells
       const emptyCount = data.filter((element) => element !== "").length;
@@ -59,8 +65,23 @@ function App() {
 
   return (
     <>
-      <div className="container w-[360px] mx-auto p-4 my-[25px] bg-white">
+      {player1!=""?(
+        <div className="container shadow-lg w-[360px] mx-auto p-4 my-[25px] bg-white">
         <h1 className="text-center text-3xl my-2 text-blue-400">Tic-Tac-Toe</h1>
+        <hr className="border-t-2 border-gray-400" />
+        <div className="playerPlace my-2 flex justify-between items-center">
+              <div className="player1 flex-col">
+                <h1 className="font-bold text-2xl text-green-500">Player1:</h1>
+                <h1 className="text-xl text-blue-500">{player1}</h1>
+              </div>
+              <div className="versus">
+                <h1 className="text-lg">vs</h1>
+              </div>
+              <div className="player2">
+              <h1 className="font-bold text-2xl text-green-500">Player2:</h1>
+                <h1 className="text-xl text-blue-500">Computer</h1>
+              </div>
+        </div>
         <hr className="border-t-2 border-gray-400" />
         <div className="game_box flex-col relative left-10 justify-center mx-auto my-2">
           <div className="first-row flex">
@@ -93,6 +114,7 @@ function App() {
           </button>
         </div>
       </div>
+      ):<Player  setPlayer1={setPlayer1}/>}
     </>
   );
 }
