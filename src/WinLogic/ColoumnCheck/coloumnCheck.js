@@ -7,7 +7,7 @@ const coloumnCheck=(data)=>{
         }
        
     }
-    return false;
+    return  [false, ""];
 }
 
 export default coloumnCheck;

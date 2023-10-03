@@ -8,7 +8,7 @@ function App() {
   const [data, setData] = useState(Array(9).fill(""));
   const [pMove, setPMove] = useState(false);
   const [winner, setWinner] = useState("");
-
+  const [gameOver,setGameOver]=useState(false);
 //Asked user name at the starting phase
 
 const [player1,setPlayer1]=useState('');
@@ -21,18 +21,20 @@ const [player1,setPlayer1]=useState('');
     if (win[0]) {
       // If there's a winner, set the winner state
       setWinner(win[1] === "x" ? player1 : "Computer");
+      setGameOver(true);
     } else {
       // Check if the game is a tie by counting non-empty cells
       const emptyCount = data.filter((element) => element !== "").length;
       if (emptyCount === 9) {
         setWinner("Game is Tie!");
+        setGameOver(true);
       }
     }
   }, [data]);
 
   // Function to handle player's move
   const playerMove = (index) => {
-    if (!data[index]) {
+    if (!gameOver&&!data[index]) {
       // Update the data array with the player's move and toggle player's turn
       const newData = [...data];
       newData[index] = "x";
@@ -58,7 +60,7 @@ const [player1,setPlayer1]=useState('');
 
   useEffect(() => {
     // Trigger the computer's move when it's the computer's turn
-    if (!pMove) {
+    if (!pMove && !gameOver) {
       computerMove();
     }
   }, [pMove]);
@@ -108,6 +110,8 @@ const [player1,setPlayer1]=useState('');
               // Reset the game data and winner state
               setData(Array(9).fill(""));
               setWinner("");
+              setPMove(false);
+              setGameOver(false);
             }}
           >
             Reset

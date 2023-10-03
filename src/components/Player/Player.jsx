@@ -18,6 +18,7 @@ function Player({setPlayer1}) {
           placeholder='enter name'
           value={user}
           onChange={(e)=>setUser(e.target.value)}
+          required
           />
           <button className='py-2 px-4 mt-6 bg-purple-500 text-white hover:bg-white hover:text-purple-600 rounded-md m-1' type="submit">Start</button>
         </form>

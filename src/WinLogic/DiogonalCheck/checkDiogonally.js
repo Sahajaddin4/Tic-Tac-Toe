@@ -10,7 +10,7 @@ const checkDiogonally=(data)=>{
       return [true,data[2]];
    }
   else{
-      return false;
+   return  [false, ""];
   }
 }
 

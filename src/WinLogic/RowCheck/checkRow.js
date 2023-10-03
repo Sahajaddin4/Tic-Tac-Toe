@@ -5,7 +5,7 @@ const checkRow=(data)=>{
         return [true,data[i]];
        }
     }
-    return false;
+    return  [false, ""];
 }
 
 export default checkRow;
