@@ -14,24 +14,7 @@ function App() {
 const [player1,setPlayer1]=useState('');
 
 
-  useEffect(() => {
-    // Check for a win condition using winLogic
-    const win = winLogic(data);
-    
-    if (win[0]) {
-      // If there's a winner, set the winner state
-      setWinner(win[1] === "x" ? player1 : "Computer");
-      setGameOver(true);
-    } else {
-      // Check if the game is a tie by counting non-empty cells
-      const emptyCount = data.filter((element) => element !== "").length;
-      if (emptyCount === 9) {
-        setWinner("Game is Tie!");
-        setGameOver(true);
-      }
-    }
-  }, [data]);
-
+ 
   // Function to handle player's move
   const playerMove = (index) => {
     if (!gameOver&&!data[index]) {
@@ -44,9 +27,10 @@ const [player1,setPlayer1]=useState('');
   };
 
   // Function for the computer's move
+  
   const computerMove = () => {
     // Find empty indexes for computer's move
-    const emptyIndexes = data.map((element, index) => (!element ? index : null)).filter((index) => index !== null);
+    const emptyIndexes = data.map((element,index)=>(element===""?index:null)).filter(index=>index!==null);
     const randomIndex = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
     
     if (randomIndex !== undefined) {
@@ -64,6 +48,25 @@ const [player1,setPlayer1]=useState('');
       computerMove();
     }
   }, [pMove]);
+  useEffect(() => {
+    // Check for a win condition using winLogic
+    const win = winLogic(data);
+    
+    if (win[0]) {
+      // If there's a winner, set the winner state
+      console.log(win);
+      setWinner(win[1] === "x" ? player1 : "Computer");
+      setGameOver(true);
+    } else {
+      // Check if the game is a tie by counting non-empty cells
+      const emptyCount = data.filter((element) => element !== "").length;
+      if (emptyCount === 9) {
+        console.log(win);
+        setWinner("Game is Tie!");
+        setGameOver(true);
+      }
+    }
+  }, [data,playerMove,computerMove]);
 
   return (
     <>
