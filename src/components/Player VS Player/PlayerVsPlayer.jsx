@@ -87,11 +87,12 @@ useEffect(()=>{
         </div>
         <hr className="border-t-2 border-gray-400" />
         {/* Display the winner if there is one */}
-        <h1 className={winner === "" ? 'hidden' : 'text-4xl'}>Winner : {winner}</h1>
-        <div className="flex justify-center items-center my-2">
+        <h1 className={winner === "" ? 'hidden' : 'text-4xl font-serif my-4 mx-auto'}>Winner : {winner}</h1>
+        <div className="flex justify-between items-center my-2">
           {/* Reset button to start a new game */}
           <button
-            className="bg-yellow-600 py-1 rounded-lg px-2 text-white hover:cursor-pointer hover:bg-white hover:text-yellow-600"
+            className="bg-yellow-700 py-1 rounded-lg px-2 text-white
+            hover:cursor-pointer hover:bg-red-700"
             onClick={() => {
               // Reset the game data and winner state
               setData(Array(9).fill(""));
@@ -101,8 +102,14 @@ useEffect(()=>{
               setGameOver(false);
             }}
           >
-            Reset
+            Reset Board
           </button>
+          <button className="bg-blue-600  py-1 rounded-lg px-2 text-white hover:cursor-pointer 
+          hover:bg-green-600 "
+          onClick={()=>window.location.reload()}
+          >
+            New Game
+            </button>
         </div>
       </div>
     </>
