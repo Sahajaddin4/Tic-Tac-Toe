@@ -1,27 +1,29 @@
 import React, { useState } from 'react'
 
-function Player({setPlayer1}) {
+function Player({name,setPlayer}) {
 
     const [user,setUser]=useState('');
 
-    const addPlayer=(e)=>{
-        e.preventDefault();
-
-        setPlayer1(user.charAt(0).toUpperCase()+user.substring(1));
-    }
+   const handleNameChange=(e)=>{
+    setUser(e.target.value)
+    setPlayer(e.target.value);
+  }
   return (
     <>
-     <div className="container    w-[300px] mx-auto my-24 bg-white shadow-lg rounded h-[150px]">
-        <form onSubmit={addPlayer} className='flex justify-between' >
+     <div className="container  ms-2  w-[300px]  my-24 bg-white shadow-lg rounded h-[150px]">
+      <div className='flex justify-center items-center'>
+        <h1 className='text-3xl font-medium text-slate-500'>{name}</h1>
+      </div>
+        <div  className='flex justify-between' >
         <input type="text" 
           className='py-1 px-2 border mt-6 bg-slate-100  focus:border-blue-600 m-1 rounded-md'
           placeholder='enter name'
           value={user}
-          onChange={(e)=>setUser(e.target.value)}
+          onChange={handleNameChange}
           required
           />
-          <button className='py-2 px-4 mt-6 bg-purple-500 text-white hover:bg-white hover:text-purple-600 rounded-md m-1' type="submit">Start</button>
-        </form>
+          
+        </div>
      </div>
     </>
   )
